@@ -1,9 +1,17 @@
 {
   "name": "apex-log",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight logging utility for JavaScript applications.",
   "main": "src/apex-log.js",
   "keywords": ["logging", "console", "utility"],
   "author": "Eirik Madland",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eirikmadland/apex-log.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eirikmadland/apex-log/issues"
+  },
+  "homepage": "https://github.com/eirikmadland/apex-log#readme"
 }
