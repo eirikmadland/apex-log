@@ -41,7 +41,8 @@ const getCallerInfo = () => {
 };
 
 // Core logging function
-function log(level, ...args) {
+// Core logging function
+function log(level = 'info', ...args) { // Default level to 'info'
   if (!globalConfig.loggingEnabled) return; // Respect global toggle
   if (globalConfig.filters.level && globalConfig.filters.level !== level) return; // Filter by level
 

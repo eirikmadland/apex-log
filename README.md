@@ -139,6 +139,29 @@ export default {
 </script>
 ```
 
+#### Initial Configuration in `App.vue`
+
+You can set up the initial configuration for Apex Log in your `App.vue` file:
+
+```vue
+<script setup>
+import apexLog from 'apex-log';
+
+// Set initial configuration for Apex Log
+apexLog.config({
+  theme: 'dark', // Default theme
+  loggingEnabled: true, // Enable logging globally
+  formatObjectsAsJson: false, // Do not format objects as JSON by default
+});
+
+// Optional: Set log filters
+apexLog.filterLogs({
+  level: 'info', // Show logs of level 'info' and above
+  context: null, // No context filtering
+});
+</script>
+```
+
 ## Configuration Options
 
 | Option                | Type      | Default   | Description                                   |
