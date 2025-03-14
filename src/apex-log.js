@@ -1,34 +1,3 @@
-// Default configuration
-const defaultConfig = {
-  theme: 'dark', // 'dark' or 'light'
-  logLevels: ['info', 'warn', 'error', 'debug'], // Supported log levels
-  loggingEnabled: true, // Global toggle for logging
-  formatObjectsAsJson: false, // Format objects as JSON strings
-  filters: {
-    level: null, // Filter logs by level (e.g., 'warn', 'error')
-    context: null, // Filter logs by context
-  },
-};
-
-// Themes based on Apple Design System colors
-const themes = {
-  dark: {
-    info: 'color: #64D2FF;', // Light blue
-    warn: 'color: #FFD60A;', // Yellow
-    error: 'color: #FF375F;', // Red
-    debug: 'color: #5E5CE6;', // Purple
-  },
-  light: {
-    info: 'color: #007AFF;', // Blue
-    warn: 'color: #FF9500;', // Orange
-    error: 'color: #FF3B30;', // Red
-    debug: 'color: #5856D6;', // Purple
-  },
-};
-
-// Global configuration
-let globalConfig = { ...defaultConfig };
-
 // Utility to get theme styles
 const getStyle = (level) => themes[globalConfig.theme][level] || '';
 
@@ -40,7 +9,6 @@ const getCallerInfo = () => {
   return match ? `${match[1]}:${match[2]}` : 'unknown';
 };
 
-// Core logging function
 // Core logging function
 function log(level = 'info', ...args) { // Default level to 'info'
   if (!globalConfig.loggingEnabled) return; // Respect global toggle
@@ -56,6 +24,18 @@ function log(level = 'info', ...args) { // Default level to 'info'
     : args;
 
   console.log(`%c${timestamp} ${prefix} (${callerInfo})`, getStyle(level), ...formattedArgs);
+}
+
+// Automatically log `watch` and `watchEffect`
+function autoLogWatch(watchFn, callback, options) {
+  return watchFn(
+    callback,
+    (...args) => {
+      log('info', `[WATCH]`, ...args);
+      callback(...args); // Call the original callback
+    },
+    options
+  );
 }
 
 // Public API
@@ -101,13 +81,14 @@ const apexLog = {
   groupEnd: () => console.groupEnd(),
   time: (label) => console.time(label),
   timeEnd: (label) => console.timeEnd(label),
+  autoLogWatch, // Expose the autoLogWatch function
 };
 
 // Export all functions as named exports
 export const config = apexLog.config;
 export const enableLogging = apexLog.enableLogging;
 export const filterLogs = apexLog.filterLogs;
-export const createLogger = apexLog.createLogger; // Now a method inside apexLog
+export const createLogger = apexLog.createLogger;
 export const info = apexLog.info;
 export const warn = apexLog.warn;
 export const error = apexLog.error;
@@ -116,6 +97,7 @@ export const group = apexLog.group;
 export const groupEnd = apexLog.groupEnd;
 export const time = apexLog.time;
 export const timeEnd = apexLog.timeEnd;
+export const autoLogWatch = apexLog.autoLogWatch;
 export { log };
 
 // Default export for the full API

@@ -162,6 +162,36 @@ apexLog.filterLogs({
 </script>
 ```
 
+### Auto Log Watch
+
+The `autoLogWatch` feature allows you to automatically log changes to reactive variables in Vue 3.
+
+#### Example with `<script setup>`:
+
+```vue
+<template>
+  <div>
+    <h1>Auto Log Watch Example</h1>
+    <input v-model="name" placeholder="Enter your name" />
+  </div>
+</template>
+
+<script setup>
+import { ref, watch } from 'vue';
+import { autoLogWatch } from 'apex-log';
+
+const name = ref('');
+
+// Automatically log changes to the `name` variable
+autoLogWatch(name, 'Name Variable');
+
+// Alternatively, you can use Vue's `watch` with manual logging
+watch(name, (newValue, oldValue) => {
+  console.log(`Name changed from ${oldValue} to ${newValue}`);
+});
+</script>
+```
+
 ## Configuration Options
 
 | Option                | Type      | Default   | Description                                   |
