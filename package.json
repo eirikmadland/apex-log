@@ -1,0 +1,9 @@
+{
+  "name": "apex-log",
+  "version": "1.0.0",
+  "description": "A lightweight logging utility for JavaScript applications.",
+  "main": "src/apex-log.js",
+  "keywords": ["logging", "console", "utility"],
+  "author": "Eirik Madland",
+  "license": "MIT"
+}
