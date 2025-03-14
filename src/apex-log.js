@@ -81,7 +81,6 @@ const apexLog = {
   groupEnd: () => console.groupEnd(),
   time: (label) => console.time(label),
   timeEnd: (label) => console.timeEnd(label),
-  autoLogWatch, // Expose the autoLogWatch function
 };
 
 // Export all functions as named exports
@@ -97,8 +96,7 @@ export const group = apexLog.group;
 export const groupEnd = apexLog.groupEnd;
 export const time = apexLog.time;
 export const timeEnd = apexLog.timeEnd;
-export const autoLogWatch = apexLog.autoLogWatch;
-export { log };
+export { log, autoLogWatch }; // Directly export `autoLogWatch`
 
 // Default export for the full API
 export default apexLog;
