@@ -23,29 +23,35 @@ npm install apex-log
 ### Basic Logging
 
 ```javascript
-import apexLog from 'apex-log';
+import { log } from 'apex-log';
 
-apexLog.info('This is an info message');
-apexLog.warn('This is a warning');
-apexLog.error('This is an error');
-apexLog.debug('This is a debug message');
+log('info', 'This is an info message');
+log('warn', 'This is a warning');
+log('error', 'This is an error');
+log('debug', 'This is a debug message');
 ```
 
 ### Theming
 
 ```javascript
+import apexLog from 'apex-log';
+
 apexLog.config({ theme: 'light' }); // Switch to light theme
 ```
 
 ### Filtering Logs
 
 ```javascript
+import apexLog from 'apex-log';
+
 apexLog.filterLogs({ level: 'warn' }); // Only show warnings and errors
 ```
 
 ### Context-Based Logging
 
 ```javascript
+import apexLog from 'apex-log';
+
 const logger = apexLog.createLogger('MyComponent');
 
 logger.info('Component initialized');
@@ -55,28 +61,82 @@ logger.error('An error occurred');
 ### Formatting Objects as JSON
 
 ```javascript
+import apexLog from 'apex-log';
+
 apexLog.config({ formatObjectsAsJson: true });
 
-apexLog.info({ key: 'value', anotherKey: 123 });
+log('info', { key: 'value', anotherKey: 123 });
 ```
 
 ### Console Utilities
 
 ```javascript
-apexLog.group('My Group');
-apexLog.info('Inside the group');
-apexLog.groupEnd();
+import { group, groupEnd, time, timeEnd, log } from 'apex-log';
 
-apexLog.time('My Timer');
+group('My Group');
+log('info', 'Inside the group');
+groupEnd();
+
+time('My Timer');
 // Some code
-apexLog.timeEnd('My Timer');
+timeEnd('My Timer');
 ```
 
 ### Enabling/Disabling Logging
 
 ```javascript
+import apexLog from 'apex-log';
+
 apexLog.enableLogging(false); // Disable all logging
 apexLog.enableLogging(true);  // Enable logging
+```
+
+### Vue 3 Usage
+
+Apex Log can be used in Vue 3 applications with `<script setup>` or the Composition API.
+
+#### Example with `<script setup>`:
+
+```vue
+<template>
+  <div>
+    <h1>Vue 3 Logging Example</h1>
+    <button @click="logMessage">Log Message</button>
+  </div>
+</template>
+
+<script setup>
+import { log } from 'apex-log';
+
+function logMessage() {
+  log('info', 'This is a log message from Vue 3!');
+}
+</script>
+```
+
+#### Example with the Composition API:
+
+```vue
+<template>
+  <div>
+    <h1>Vue 3 Logging Example</h1>
+    <button @click="logMessage">Log Message</button>
+  </div>
+</template>
+
+<script>
+import { log } from 'apex-log';
+
+export default {
+  setup() {
+    const logMessage = () => {
+      log('info', 'This is a log message from Vue 3!');
+    };
+
+    return { logMessage };
+  },
+};
+</script>
 ```
 
 ## Configuration Options
