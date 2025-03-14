@@ -1,6 +1,6 @@
 {
   "name": "apex-log",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A lightweight logging utility for JavaScript applications.",
   "main": "src/apex-log.js",
   "keywords": [
