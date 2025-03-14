@@ -1,3 +1,18 @@
+// Default global configuration
+const defaultConfig = {
+  theme: 'dark', // Default theme
+  logLevels: ['info', 'warn', 'error', 'debug'], // Supported log levels
+  loggingEnabled: true, // Enable or disable logging globally
+  formatObjectsAsJson: false, // Format objects as JSON strings
+  filters: {
+    level: null, // Filter logs by level (e.g., 'warn', 'error')
+    context: null, // Filter logs by context
+  },
+};
+
+// Global configuration (initialized with default values)
+let globalConfig = { ...defaultConfig };
+
 // Utility to get theme styles
 const getStyle = (level) => themes[globalConfig.theme][level] || '';
 
