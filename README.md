@@ -11,6 +11,8 @@ Apex Log is a lightweight logging utility for JavaScript applications that exten
 - **Context-Based Logging**: Create loggers with specific contexts.
 - **Object Formatting**: Option to format objects as JSON strings.
 - **Console Utilities**: Group logs, measure execution time, and more.
+- **Auto Log Watch**: Automatically log changes to reactive variables in Vue 3.
+- **Custom Log Handlers**: Define custom handlers for log messages.
 
 ## Installation
 
@@ -162,6 +164,30 @@ apexLog.filterLogs({
 </script>
 ```
 
+### Custom Log Handlers
+
+You can define custom handlers to process log messages before they are output to the console.
+
+#### Example with `<script setup>`:
+
+```vue
+<script setup>
+import apexLog from 'apex-log';
+
+// Define a custom log handler
+apexLog.config({
+  customHandler: (level, message, context) => {
+    // Example: Send logs to an external monitoring service
+    sendToMonitoringService({ level, message, context });
+  },
+});
+
+function sendToMonitoringService(log) {
+  console.log('Sending log to monitoring service:', log);
+}
+</script>
+```
+
 ### Auto Log Watch
 
 The `autoLogWatch` feature allows you to automatically log changes to reactive variables in Vue 3.
@@ -202,6 +228,7 @@ watch(name, (newValue, oldValue) => {
 | `formatObjectsAsJson` | `boolean` | `false`   | Format objects as JSON strings               |
 | `filters.level`       | `string`  | `null`    | Filter logs by level                         |
 | `filters.context`     | `string`  | `null`    | Filter logs by context                       |
+| `customHandler`       | `function`| `null`    | Custom handler for processing log messages   |
 
 ## License
 
